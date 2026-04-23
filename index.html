@@ -298,14 +298,16 @@
   </footer>
 
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  emailjs.init('3kI1keHvIHFbDx1fE');
+
   const gallery  = document.getElementById('homeGallery');
   const prevBtn  = document.getElementById('galleryPrev');
   const nextBtn  = document.getElementById('galleryNext');
   const dotsWrap = document.getElementById('galleryDots');
   const cards    = Array.from(gallery.querySelectorAll('.location-card'));
 
-  // Build dots
   cards.forEach((_, i) => {
     const d = document.createElement('button');
     d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
@@ -345,24 +347,22 @@
     status.style.display = 'none';
 
     try {
-      const res  = await fetch('http://localhost:3000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message })
+      await emailjs.send('service_mwnwx0j', 'template_tpoxc7p', {
+        from_name:  name,
+        from_email: email,
+        message:    message,
+        reply_to:   email,
+        to_email:   'shavinder733@gmail.com',
       });
-      const data = await res.json();
-      if (res.ok) {
-        status.style.color  = 'var(--teal)';
-        status.innerText    = "✓ Message sent! I'll get back to you soon.";
-        document.getElementById('contactForm').reset();
-      } else {
-        status.style.color  = 'var(--red-bright)';
-        status.innerText    = '✗ ' + (data.message || 'Something went wrong.');
-      }
+
+      status.style.color  = 'var(--teal)';
+      status.innerText    = "✓ Message sent! I'll get back to you soon.";
+      document.getElementById('contactForm').reset();
     } catch (err) {
       status.style.color = 'var(--red-bright)';
-      status.innerText   = '✗ Could not reach server. Is it running?';
+      status.innerText   = '✗ Failed to send. Email me at shavinder733@gmail.com';
     }
+
     status.style.display = 'block';
     btn.innerText  = 'Send Message';
     btn.disabled   = false;
