@@ -21,18 +21,83 @@ function updateCartBadge() {
 }
 
 // ============================================
-//   ACCOUNT LINK
+//   ACCOUNT DROPDOWN
 // ============================================
 function updateAccountLink() {
   const accountLink = document.getElementById('accountLink');
+  if (!accountLink) return;
+
   const currentUser = JSON.parse(localStorage.getItem('wildlifeUser'));
-  if (accountLink && currentUser) {
+
+  // Build dropdown wrapper
+  const wrapper = document.createElement('div');
+  wrapper.className = 'account-dropdown-wrapper';
+
+  if (currentUser) {
     const firstName = currentUser.name.split(' ')[0];
     const icon = currentUser.role === 'Admin' ? '👑' : '👤';
-    accountLink.innerHTML = `${icon} Hi, ${firstName}`;
-    accountLink.href = currentUser.role === 'Admin' ? 'admin.html' : 'my-orders.html';
+
+    wrapper.innerHTML = `
+      <button class="nav-item account-trigger" id="accountTrigger" aria-haspopup="true" aria-expanded="false">
+        ${icon} Hi, ${firstName}
+        <svg class="chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="account-dropdown" id="accountDropdown">
+        ${currentUser.role === 'Admin' ? `
+        <a href="admin.html" class="dropdown-item">
+          <span class="dropdown-icon">⚙️</span>
+          <span>Admin Dashboard</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        ` : ''}
+        <a href="my-orders.html" class="dropdown-item">
+          <span class="dropdown-icon">📦</span>
+          <span>My Orders</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item dropdown-logout" onclick="logoutUser()">
+          <span class="dropdown-icon">🚪</span>
+          <span>Log Out</span>
+        </button>
+      </div>
+    `;
+  } else {
+    wrapper.innerHTML = `
+      <a href="login.html" class="nav-item" id="accountTrigger">
+        👤 Login / Sign Up
+      </a>
+    `;
+  }
+
+  accountLink.replaceWith(wrapper);
+
+  // Toggle dropdown
+  const trigger = document.getElementById('accountTrigger');
+  const dropdown = document.getElementById('accountDropdown');
+  if (trigger && dropdown) {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = dropdown.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', open);
+      trigger.classList.toggle('active', open);
+    });
   }
 }
+
+function logoutUser() {
+  localStorage.removeItem('wildlifeUser');
+  window.location.href = 'index.html';
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => {
+  const dropdown = document.getElementById('accountDropdown');
+  const trigger = document.getElementById('accountTrigger');
+  if (dropdown && dropdown.classList.contains('open')) {
+    dropdown.classList.remove('open');
+    if (trigger) { trigger.setAttribute('aria-expanded', false); trigger.classList.remove('active'); }
+  }
+});
 
 // ============================================
 //   SCROLL REVEAL
