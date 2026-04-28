@@ -1,969 +1,1417 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guitar | Shavinder Singh</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .about-li-link[style*="--yt-color"] {
-      border-color: var(--border);
-    }
-    .about-li-link[style*="--yt-color"]:hover {
-      color: white;
-      border-color: #ff0000;
-      background: rgba(255, 0, 0, 0.1);
-      transform: translateX(5px);
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guitar | Shavinder Singh</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .about-li-link[style*="--yt-color"] {
+        border-color: var(--border);
+      }
+      .about-li-link[style*="--yt-color"]:hover {
+        color: white;
+        border-color: #ff0000;
+        background: rgba(255, 0, 0, 0.1);
+        transform: translateX(5px);
+      }
 
-    /* ── Guitar-page specific styles ── */
+      /* ── Guitar-page specific styles ── */
 
-    .guitar-hero {
-      height: 70vh;
-      min-height: 480px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-start;
-      padding: 0 80px 70px;
-      position: relative;
-      overflow: hidden;
-    }
+      .guitar-hero {
+        height: 70vh;
+        min-height: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 0 80px 70px;
+        position: relative;
+        overflow: hidden;
+      }
 
-    .guitar-hero-bg {
-      position: absolute;
-      inset: -5%;
-      background: radial-gradient(ellipse at 30% 60%, rgba(192,57,43,0.18) 0%, transparent 55%),
-                  radial-gradient(ellipse at 80% 20%, rgba(42,157,143,0.1) 0%, transparent 50%),
-                  linear-gradient(135deg, #0a0608 0%, #0e0a0c 40%, #080c0b 100%);
-      animation: guitarBgPulse 8s ease-in-out infinite alternate;
-    }
-    @keyframes guitarBgPulse {
-      from { opacity: 0.9; transform: scale(1); }
-      to   { opacity: 1;   transform: scale(1.03); }
-    }
+      .guitar-hero-bg {
+        position: absolute;
+        inset: -5%;
+        background:
+          radial-gradient(
+            ellipse at 30% 60%,
+            rgba(192, 57, 43, 0.18) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(42, 157, 143, 0.1) 0%,
+            transparent 50%
+          ),
+          linear-gradient(135deg, #0a0608 0%, #0e0a0c 40%, #080c0b 100%);
+        animation: guitarBgPulse 8s ease-in-out infinite alternate;
+      }
+      @keyframes guitarBgPulse {
+        from {
+          opacity: 0.9;
+          transform: scale(1);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.03);
+        }
+      }
 
-    /* big decorative guitar strings */
-    .guitar-hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
+      /* big decorative guitar strings */
+      .guitar-hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
           90deg,
           transparent,
           transparent 120px,
-          rgba(255,255,255,0.012) 120px,
-          rgba(255,255,255,0.012) 121px
+          rgba(255, 255, 255, 0.012) 120px,
+          rgba(255, 255, 255, 0.012) 121px
         );
-    }
+      }
 
-    .guitar-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top,
-        rgba(8,8,8,0.98) 0%,
-        rgba(8,8,8,0.2) 60%,
-        transparent 100%);
-      z-index: 1;
-    }
+      .guitar-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(8, 8, 8, 0.98) 0%,
+          rgba(8, 8, 8, 0.2) 60%,
+          transparent 100%
+        );
+        z-index: 1;
+      }
 
-    .guitar-hero > div {
-      position: relative;
-      z-index: 2;
-    }
+      .guitar-hero > div {
+        position: relative;
+        z-index: 2;
+      }
 
-    .guitar-hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -2px;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-      animation: heroReveal 1.2s var(--ease-out-expo) 0.1s forwards;
-      opacity: 0;
-      transform: translateY(40px);
-    }
+      .guitar-hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 7vw, 6rem);
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -2px;
+        color: var(--text-primary);
+        margin-bottom: 16px;
+        animation: heroReveal 1.2s var(--ease-out-expo) 0.1s forwards;
+        opacity: 0;
+        transform: translateY(40px);
+      }
 
-    .guitar-hero p {
-      font-size: 0.82rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      animation: heroReveal 1.2s var(--ease-out-expo) 0.25s forwards;
-      opacity: 0;
-      transform: translateY(16px);
-    }
+      .guitar-hero p {
+        font-size: 0.82rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        animation: heroReveal 1.2s var(--ease-out-expo) 0.25s forwards;
+        opacity: 0;
+        transform: translateY(16px);
+      }
 
-    /* ── Credentials bar ── */
-    .guitar-creds {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-      padding: 28px 80px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-card);
-    }
+      /* ── Credentials bar ── */
+      .guitar-creds {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 28px 80px;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-card);
+      }
 
-    .cred-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      border-radius: 50px;
-      border: 1px solid var(--border-light);
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      color: var(--text-muted);
-      background: var(--surface);
-      transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
-    }
-    .cred-pill:hover { border-color: var(--red); color: var(--text-primary); transform: translateY(-2px); }
-    .cred-pill .cred-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--red);
-      flex-shrink: 0;
-    }
-    .cred-pill.teal .cred-dot { background: var(--teal); }
-    .cred-pill.teal:hover { border-color: var(--teal); }
-    .cred-pill.gold .cred-dot { background: var(--gold); }
-    .cred-pill.gold:hover { border-color: var(--gold); }
+      .cred-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px;
+        border-radius: 50px;
+        border: 1px solid var(--border-light);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
+        background: var(--surface);
+        transition:
+          border-color var(--transition-fast),
+          color var(--transition-fast),
+          transform var(--transition-fast);
+      }
+      .cred-pill:hover {
+        border-color: var(--red);
+        color: var(--text-primary);
+        transform: translateY(-2px);
+      }
+      .cred-pill .cred-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--red);
+        flex-shrink: 0;
+      }
+      .cred-pill.teal .cred-dot {
+        background: var(--teal);
+      }
+      .cred-pill.teal:hover {
+        border-color: var(--teal);
+      }
+      .cred-pill.gold .cred-dot {
+        background: var(--gold);
+      }
+      .cred-pill.gold:hover {
+        border-color: var(--gold);
+      }
 
-    .cred-sep {
-      width: 1px; height: 24px;
-      background: var(--border);
-      flex-shrink: 0;
-    }
+      .cred-sep {
+        width: 1px;
+        height: 24px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
 
-    /* ── About guitar section ── */
-    .guitar-about {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 80px 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
+      /* ── About guitar section ── */
+      .guitar-about {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 80px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
 
-    .guitar-about-text h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -1px;
-      line-height: 1.05;
-      margin-bottom: 28px;
-    }
+      .guitar-about-text h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 700;
+        letter-spacing: -1px;
+        line-height: 1.05;
+        margin-bottom: 28px;
+      }
 
-    .guitar-about-text h2 em {
-      font-style: italic;
-      color: var(--red);
-    }
+      .guitar-about-text h2 em {
+        font-style: italic;
+        color: var(--red);
+      }
 
-    .guitar-about-text p {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: #aaa;
-      margin-bottom: 20px;
-    }
+      .guitar-about-text p {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        line-height: 1.9;
+        color: #aaa;
+        margin-bottom: 20px;
+      }
 
-    /* Timeline */
-    .guitar-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+      /* Timeline */
+      .guitar-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
 
-    .timeline-item {
-      display: flex;
-      gap: 24px;
-      position: relative;
-      padding-bottom: 32px;
-    }
-    .timeline-item:last-child { padding-bottom: 0; }
+      .timeline-item {
+        display: flex;
+        gap: 24px;
+        position: relative;
+        padding-bottom: 32px;
+      }
+      .timeline-item:last-child {
+        padding-bottom: 0;
+      }
 
-    .timeline-left {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 40px;
-      flex-shrink: 0;
-    }
+      .timeline-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40px;
+        flex-shrink: 0;
+      }
 
-    .timeline-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--red);
-      border: 2px solid var(--bg-deep);
-      outline: 2px solid var(--red);
-      flex-shrink: 0;
-      margin-top: 4px;
-      transition: transform var(--transition-fast), background var(--transition-fast);
-    }
-    .timeline-item:hover .timeline-dot {
-      transform: scale(1.4);
-      background: var(--text-primary);
-    }
+      .timeline-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--red);
+        border: 2px solid var(--bg-deep);
+        outline: 2px solid var(--red);
+        flex-shrink: 0;
+        margin-top: 4px;
+        transition:
+          transform var(--transition-fast),
+          background var(--transition-fast);
+      }
+      .timeline-item:hover .timeline-dot {
+        transform: scale(1.4);
+        background: var(--text-primary);
+      }
 
-    .timeline-line {
-      width: 1px;
-      flex: 1;
-      background: var(--border);
-      margin-top: 6px;
-    }
-    .timeline-item:last-child .timeline-line { display: none; }
+      .timeline-line {
+        width: 1px;
+        flex: 1;
+        background: var(--border);
+        margin-top: 6px;
+      }
+      .timeline-item:last-child .timeline-line {
+        display: none;
+      }
 
-    .timeline-content {
-      padding-top: 0;
-    }
+      .timeline-content {
+        padding-top: 0;
+      }
 
-    .timeline-year {
-      font-size: 0.68rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--red);
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
+      .timeline-year {
+        font-size: 0.68rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--red);
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
 
-    .timeline-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
+      .timeline-title {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+      }
 
-    .timeline-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
+      .timeline-desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
 
-    /* ── Covers grid ── */
-    .covers-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 80px 120px;
-    }
+      /* ── Covers grid ── */
+      .covers-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 80px 120px;
+      }
 
-    .covers-section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 40px;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+      .covers-section-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
 
-    .covers-section-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      letter-spacing: -0.8px;
-    }
+      .covers-section-header h2 {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 700;
+        letter-spacing: -0.8px;
+      }
 
-    .covers-section-header p {
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-faint);
-    }
+      .covers-section-header p {
+        font-size: 0.78rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-faint);
+      }
 
-    /* Upload placeholder / empty state */
-    .covers-empty {
-      border: 1px dashed rgba(255,255,255,0.12);
-      border-radius: var(--radius-lg);
-      padding: 80px 40px;
-      text-align: center;
-    }
+      /* Upload placeholder / empty state */
+      .covers-empty {
+        border: 1px dashed rgba(255, 255, 255, 0.12);
+        border-radius: var(--radius-lg);
+        padding: 80px 40px;
+        text-align: center;
+      }
 
-    .covers-empty .empty-icon {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      opacity: 0.3;
-      display: block;
-    }
+      .covers-empty .empty-icon {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        opacity: 0.3;
+        display: block;
+      }
 
-    .covers-empty h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
+      .covers-empty h3 {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        margin-bottom: 10px;
+      }
 
-    .covers-empty p {
-      font-size: 0.85rem;
-      color: var(--text-faint);
-      max-width: 400px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+      .covers-empty p {
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        max-width: 400px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
 
-    /* Covers grid — used when videos are added */
-    .covers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
+      /* Covers grid — used when videos are added */
+      .covers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+      }
 
-    /* Individual cover card */
-    .cover-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-slow);
-    }
-    .cover-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-      border-color: var(--border-light);
-    }
+      /* Individual cover card */
+      .cover-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        transition:
+          transform var(--transition-slow),
+          box-shadow var(--transition-slow),
+          border-color var(--transition-slow);
+      }
+      .cover-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        border-color: var(--border-light);
+      }
 
-    .cover-video-wrap {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      overflow: hidden;
-      background: #000;
-    }
-    .cover-video-wrap iframe,
-    .cover-video-wrap video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
+      .cover-video-wrap {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+        overflow: hidden;
+        background: #000;
+      }
+      .cover-video-wrap iframe,
+      .cover-video-wrap video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
 
-    .cover-info {
-      padding: 20px 24px;
-    }
-    .cover-song {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      margin-bottom: 4px;
-      color: var(--text-primary);
-    }
-    .cover-artist {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-    .cover-tag {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 4px 12px;
-      border-radius: 50px;
-      font-size: 0.7rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border: 1px solid var(--border);
-      color: var(--text-faint);
-    }
+      .cover-info {
+        padding: 20px 24px;
+      }
+      .cover-song {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        margin-bottom: 4px;
+        color: var(--text-primary);
+      }
+      .cover-artist {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        letter-spacing: 0.5px;
+      }
+      .cover-tag {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        border: 1px solid var(--border);
+        color: var(--text-faint);
+      }
 
-    /* ── How to add covers guide (for Shavinder) ── */
-    .add-covers-guide {
-      max-width: 1200px;
-      margin: 0 auto 80px;
-      padding: 0 80px;
-    }
-    .guide-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--teal);
-      border-radius: var(--radius);
-      padding: 24px 28px;
-    }
-    .guide-box h4 {
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 10px;
-    }
-    .guide-box p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .guide-box code {
-      background: var(--surface);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      color: var(--gold);
-    }
+      /* ── How to add covers guide (for Shavinder) ── */
+      .add-covers-guide {
+        max-width: 1200px;
+        margin: 0 auto 80px;
+        padding: 0 80px;
+      }
+      .guide-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--teal);
+        border-radius: var(--radius);
+        padding: 24px 28px;
+      }
+      .guide-box h4 {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 10px;
+      }
+      .guide-box p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+      .guide-box code {
+        background: var(--surface);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        color: var(--gold);
+      }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .guitar-hero { padding: 0 40px 60px; }
-      .guitar-creds { padding: 20px 40px; }
-      .guitar-about { grid-template-columns: 1fr; gap: 50px; padding: 60px 40px 0; }
-      .covers-section { padding: 60px 40px 80px; }
-      .add-covers-guide { padding: 0 40px; }
-    }
-    @media (max-width: 600px) {
-      .guitar-hero { padding: 0 24px 50px; }
-      .guitar-creds { padding: 16px 24px; }
-      .guitar-about { padding: 50px 24px 0; }
-      .covers-section { padding: 50px 24px 60px; }
-      .add-covers-guide { padding: 0 24px; margin-bottom: 50px; }
-      .cred-sep { display: none; }
-    }
-  </style>
-</head>
-<body>
+      /* ── Responsive ── */
+      @media (max-width: 900px) {
+        .guitar-hero {
+          padding: 0 40px 60px;
+        }
+        .guitar-creds {
+          padding: 20px 40px;
+        }
+        .guitar-about {
+          grid-template-columns: 1fr;
+          gap: 50px;
+          padding: 60px 40px 0;
+        }
+        .covers-section {
+          padding: 60px 40px 80px;
+        }
+        .add-covers-guide {
+          padding: 0 40px;
+        }
+      }
+      @media (max-width: 600px) {
+        .guitar-hero {
+          padding: 0 24px 50px;
+        }
+        .guitar-creds {
+          padding: 16px 24px;
+        }
+        .guitar-about {
+          padding: 50px 24px 0;
+        }
+        .covers-section {
+          padding: 50px 24px 60px;
+        }
+        .add-covers-guide {
+          padding: 0 24px;
+          margin-bottom: 50px;
+        }
+        .cred-sep {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-right-nav">
+      <a href="checkout.html" class="nav-item">
+        🛒 Cart <span id="cartBadge">0</span>
+      </a>
+      <a href="login.html" id="accountLink" class="nav-item">
+        👤 Login / Sign Up
+      </a>
+    </div>
 
-<div class="top-right-nav">
-  <a href="checkout.html" class="nav-item">
-    🛒 Cart <span id="cartBadge">0</span>
-  </a>
-  <a href="login.html" id="accountLink" class="nav-item">
-    👤 Login / Sign Up
-  </a>
-</div>
+    <div class="menu-btn" onclick="toggleDashboard()">☰</div>
 
-<div class="menu-btn" onclick="toggleDashboard()">☰</div>
+    <div class="dashboard" id="dashboard">
+      <span class="close-btn" onclick="toggleDashboard()">×</span>
+      <h3>Shavinder Singh</h3>
 
-<div class="dashboard" id="dashboard">
-  <span class="close-btn" onclick="toggleDashboard()">×</span>
-  <h3>Shavinder Singh</h3>
+      <a href="index.html">Home</a>
+      <a href="corbett.html">Jim Corbett</a>
+      <a href="ranthambore.html">Ranthambore</a>
+      <a href="sariska.html">Sariska</a>
+      <a href="sigiriya.html">Sigiriya</a>
+      <a href="yala.html">Yala</a>
+      <a href="guitar.html">🎸 Guitar</a>
 
-  <a href="index.html">Home</a>
-  <a href="corbett.html">Jim Corbett</a>
-  <a href="ranthambore.html">Ranthambore</a>
-  <a href="sariska.html">Sariska</a>
-  <a href="sigiriya.html">Sigiriya</a>
-  <a href="yala.html">Yala</a>
-  <a href="guitar.html">🎸 Guitar</a>
+      <div
+        style="
+          height: 1px;
+          background: rgba(255, 255, 255, 0.07);
+          margin: 12px 0;
+        "
+      ></div>
 
-  <div style="height:1px; background:rgba(255,255,255,0.07); margin:12px 0;"></div>
+      <a href="https://instagram.com/shavinder.nef" target="_blank">
+        <svg viewBox="0 0 24 24" class="icon">
+          <path
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+          />
+        </svg>
+        @shavinder.nef — Wildlife
+      </a>
 
-  <a href="https://instagram.com/shavinder.nef" target="_blank">
-    <svg viewBox="0 0 24 24" class="icon"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    @shavinder.nef — Wildlife
-  </a>
-
-  <a href="https://instagram.com/shavinder.35" target="_blank">
-    <svg viewBox="0 0 24 24" class="icon"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    @shavinder.35 — Guitar
-  </a>
-
-  <a href="https://www.youtube.com/@shavinder.19" target="_blank">
-    <svg viewBox="0 0 24 24" class="icon"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-    YouTube
-  </a>
-
-  <a href="https://linkedin.com/in/shavinder-singh" target="_blank">
-    <svg viewBox="0 0 24 24" class="icon"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-    LinkedIn
-  </a>
-</div>
-
-<!-- ── HERO ── -->
-<div class="guitar-hero">
-  <div class="guitar-hero-bg"></div>
-  <div>
-    <h1>Guitar</h1>
-    <p>Covers · Originals · Years of Practice</p>
-  </div>
-</div>
-
-<!-- ── CREDENTIALS BAR ── -->
-<div class="guitar-creds">
-  <div class="cred-pill">
-    <span class="cred-dot"></span>
-    Playing since 8th Grade
-  </div>
-  <div class="cred-sep"></div>
-  <div class="cred-pill teal">
-    <span class="cred-dot"></span>
-    Trinity College London — Grade 4
-  </div>
-  <div class="cred-sep"></div>
-  <div class="cred-pill gold">
-    <span class="cred-dot"></span>
-    Rockschool — Grade 2
-  </div>
-</div>
-
-<!-- ── ABOUT + TIMELINE ── -->
-<div class="guitar-about">
-
-  <div class="guitar-about-text reveal">
-    <h2>Playing guitar<br>since <em>school.</em></h2>
-    <p>
-      I picked up the guitar in 8th grade and haven't put it down since. What started as curiosity became a real discipline — working through theory, grades, and a lot of hours with a metronome.
-    </p>
-    <p>
-      I've cleared <span class="highlight">Trinity College London Grade 4</span> and <span class="highlight">Rockschool Grade 2</span>, two of the most recognised grading bodies in the world. Exams are just one part of it — the rest is covers, jamming, and figuring out what makes a song feel right.
-    </p>
-    <p>
-      Wildlife photography and guitar feed from the same place: patience, attention, and learning to stay present in the moment.
-    </p>
-
-    <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
-      <a href="https://instagram.com/shavinder.35" target="_blank" class="about-ig-link">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <a href="https://instagram.com/shavinder.35" target="_blank">
+        <svg viewBox="0 0 24 24" class="icon">
+          <path
+            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+          />
+        </svg>
         @shavinder.35 — Guitar
       </a>
-      <a href="https://www.youtube.com/@shavinder.19" target="_blank" class="about-li-link" style="--yt-color: #ff0000;">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube — @shavinder.19
+
+      <a href="https://www.youtube.com/@shavinder.19" target="_blank">
+        <svg viewBox="0 0 24 24" class="icon">
+          <path
+            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+          />
+        </svg>
+        YouTube
+      </a>
+
+      <a href="https://linkedin.com/in/shavinder-singh" target="_blank">
+        <svg viewBox="0 0 24 24" class="icon">
+          <path
+            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+          />
+        </svg>
+        LinkedIn
       </a>
     </div>
-  </div>
 
-  <div class="guitar-timeline reveal reveal-delay-2">
-    <div class="timeline-item">
-      <div class="timeline-left">
-        <div class="timeline-dot"></div>
-        <div class="timeline-line"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-year">Class 8 · The Beginning</div>
-        <div class="timeline-title">First guitar</div>
-        <p class="timeline-desc">Picked up acoustic, started learning chords and basic theory. Never stopped.</p>
+    <!-- ── HERO ── -->
+    <div class="guitar-hero">
+      <div class="guitar-hero-bg"></div>
+      <div>
+        <h1>Guitar</h1>
+        <p>Covers · Originals · Years of Practice</p>
       </div>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-left">
-        <div class="timeline-dot"></div>
-        <div class="timeline-line"></div>
+    <!-- ── CREDENTIALS BAR ── -->
+    <div class="guitar-creds">
+      <div class="cred-pill">
+        <span class="cred-dot"></span>
+        Playing since 8th Grade
       </div>
-      <div class="timeline-content">
-        <div class="timeline-year">Rockschool</div>
-        <div class="timeline-title">Rockschool Grade 2 — Passed</div>
-        <p class="timeline-desc">Rockschool's electric guitar syllabus, covering contemporary styles, rhythm, and technique.</p>
+      <div class="cred-sep"></div>
+      <div class="cred-pill teal">
+        <span class="cred-dot"></span>
+        Trinity College London — Grade 4
       </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-left">
-        <div class="timeline-dot"></div>
-        <div class="timeline-line"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-year">Trinity College London</div>
-        <div class="timeline-title">Trinity Grade 4 — Passed</div>
-        <p class="timeline-desc">One of the UK's oldest grading bodies. Grade 4 covers scales, sight-reading, aural tests, and prepared pieces.</p>
+      <div class="cred-sep"></div>
+      <div class="cred-pill gold">
+        <span class="cred-dot"></span>
+        Rockschool — Grade 2
       </div>
     </div>
 
-    <div class="timeline-item">
-      <div class="timeline-left">
-        <div class="timeline-dot"></div>
-        <div class="timeline-line"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-year">Now</div>
-        <div class="timeline-title">Covers &amp; Beyond</div>
-        <p class="timeline-desc">Recording covers, exploring different genres, and still going.</p>
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- ── ABOUT + TIMELINE ── -->
+    <div class="guitar-about">
+      <div class="guitar-about-text reveal">
+        <h2>Playing guitar<br />since <em>school.</em></h2>
+        <p>
+          I picked up the guitar in 8th grade and haven't put it down since.
+          What started as curiosity became a real discipline — working through
+          theory, grades, and a lot of hours with a metronome.
+        </p>
+        <p>
+          I've cleared
+          <span class="highlight">Trinity College London Grade 4</span> and
+          <span class="highlight">Rockschool Grade 2</span>, two of the most
+          recognised grading bodies in the world. Exams are just one part of it
+          — the rest is covers, jamming, and figuring out what makes a song feel
+          right.
+        </p>
+        <p>
+          Wildlife photography and guitar feed from the same place: patience,
+          attention, and learning to stay present in the moment.
+        </p>
 
-<!-- ── COVERS ── -->
-<div class="covers-section">
-  <div class="covers-section-header reveal">
-    <h2>Covers</h2>
-    <p>More coming soon</p>
-  </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+          "
+        >
+          <a
+            href="https://instagram.com/shavinder.35"
+            target="_blank"
+            class="about-ig-link"
+          >
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              />
+            </svg>
+            @shavinder.35 — Guitar
+          </a>
+          <a
+            href="https://www.youtube.com/@shavinder.19"
+            target="_blank"
+            class="about-li-link"
+            style="--yt-color: #ff0000"
+          >
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              />
+            </svg>
+            YouTube — @shavinder.19
+          </a>
+        </div>
+      </div>
 
-  <!--
-    ═══════════════════════════════════════════════════════
-    HOW TO ADD A COVER:
-    Copy one <div class="cover-card"> block below and fill in:
-      - YouTube embed URL  (share → embed → copy src URL)
-      - OR a local video path if you recorded directly
-      - Song name, artist name, and a tag (e.g. "Acoustic", "Electric", "Fingerstyle")
+      <div class="guitar-timeline reveal reveal-delay-2">
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Class 8 · The Beginning</div>
+            <div class="timeline-title">First guitar</div>
+            <p class="timeline-desc">
+              Picked up acoustic, started learning chords and basic theory.
+              Never stopped.
+            </p>
+          </div>
+        </div>
 
-    Example YouTube embed src:
-      https://www.youtube.com/embed/VIDEO_ID
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Rockschool</div>
+            <div class="timeline-title">Rockschool Grade 2 — Passed</div>
+            <p class="timeline-desc">
+              Rockschool's electric guitar syllabus, covering contemporary
+              styles, rhythm, and technique.
+            </p>
+          </div>
+        </div>
 
-    Uncomment and fill the example card below to get started.
-    ═══════════════════════════════════════════════════════
-  -->
-      
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Trinity College London</div>
+            <div class="timeline-title">Trinity Grade 4 — Passed</div>
+            <p class="timeline-desc">
+              One of the UK's oldest grading bodies. Grade 4 covers scales,
+              sight-reading, aural tests, and prepared pieces.
+            </p>
+          </div>
+        </div>
 
-  <div class="covers-grid" id="coversGrid">
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/u5UEJFg_Sgk?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">So Far Away</div>
-        <div class="cover-artist">Avenged Sevenfold</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/QMoF4yn-g-Q?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Bohemian Rhapsody</div>
-        <div class="cover-artist">Queen</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/LpLpNwN21xY?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Crazy Train</div>
-        <div class="cover-artist">Ozzy Osbourne</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/q0DnB08CQ5o"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Anastasia</div>
-        <div class="cover-artist">Slash and Miles Kennedy</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/x7Amf3yJajo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Hail To The King</div>
-        <div class="cover-artist">Avenged Sevenfold</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/0vn5wZP5mfk?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Whole Lotta Love</div>
-        <div class="cover-artist">Led Zeppelin</div>
-        <span class="cover-tag">Electric</span>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Now</div>
+            <div class="timeline-title">Covers &amp; Beyond</div>
+            <p class="timeline-desc">
+              Recording covers, exploring different genres, and still going.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/rxQj9RMD_nE?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+    <!-- ── COVERS ── -->
+    <div class="covers-section">
+      <div class="covers-section-header reveal">
+        <h2>Covers</h2>
+        <p>More coming soon</p>
       </div>
-      <div class="cover-info">
-        <div class="cover-song">Anastasia</div>
-        <div class="cover-artist">Slash And Miles Kennedy</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>    
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/2Yygm0CDk7M?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Stronger</div>
-        <div class="cover-artist">Kanye West</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>   
+      <div class="covers-grid" id="coversGrid">
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/Cy_14YhF9j4?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Master Of Puppets</div>
+            <div class="cover-artist">Metallica</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/fXeyyGzePW4?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Monster</div>
-        <div class="cover-artist">Skillet</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>   
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/u5UEJFg_Sgk?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">So Far Away</div>
+            <div class="cover-artist">Avenged Sevenfold</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/O-dqLMWxiuM?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Gehra Hua</div>
-        <div class="cover-artist">Arijit Singh</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div> 
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/QMoF4yn-g-Q?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Bohemian Rhapsody</div>
+            <div class="cover-artist">Queen</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/1OLZlQ77hYs?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Kim Jong Goon</div>
-        <div class="cover-artist">Hyperbaiter</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div> 
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/LpLpNwN21xY?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Crazy Train</div>
+            <div class="cover-artist">Ozzy Osbourne</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/_Ik3cvXgC5s?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Knockin On Heavens Door</div>
-        <div class="cover-artist">Gun N Roses</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div> 
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/q0DnB08CQ5o"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Anastasia</div>
+            <div class="cover-artist">Slash and Miles Kennedy</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/efG6GvhduUc?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Knockin On Heavens Door</div>
-        <div class="cover-artist">Gun N Roses</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div> 
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/x7Amf3yJajo"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Hail To The King</div>
+            <div class="cover-artist">Avenged Sevenfold</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/GF6E-abDNIg?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/0vn5wZP5mfk?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Whole Lotta Love</div>
+            <div class="cover-artist">Led Zeppelin</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/rxQj9RMD_nE?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Anastasia</div>
+            <div class="cover-artist">Slash And Miles Kennedy</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/2Yygm0CDk7M?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Stronger</div>
+            <div class="cover-artist">Kanye West</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/fXeyyGzePW4?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Monster</div>
+            <div class="cover-artist">Skillet</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/O-dqLMWxiuM?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Gehra Hua</div>
+            <div class="cover-artist">Arijit Singh</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/1OLZlQ77hYs?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Kim Jong Goon</div>
+            <div class="cover-artist">Hyperbaiter</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/_Ik3cvXgC5s?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Knockin On Heavens Door</div>
+            <div class="cover-artist">Gun N Roses</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/efG6GvhduUc?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Knockin On Heavens Door</div>
+            <div class="cover-artist">Gun N Roses</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/GF6E-abDNIg?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Anastasia</div>
+            <div class="cover-artist">Slash And Miles Kennedy</div>
+            <span class="cover-tag">Acoustic</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/Jv7lGUOtrkg?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Ella Baila Sola</div>
+            <div class="cover-artist">Eslabon Armado and Peso Pluma</div>
+            <span class="cover-tag">Acoustic</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/vkqL4qkBpF0?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Eruption</div>
+            <div class="cover-artist">Van Halen</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/ZLq_h1wZhYQ?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Pokemon theme</div>
+            <div class="cover-artist">Jason Paige</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/EKyLMAM2KuA?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Stranger Things Theme</div>
+            <div class="cover-artist">Kyle Dixon and Micheal Stein</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/37VKztncr90?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">November Rain</div>
+            <div class="cover-artist">Guns N Roses</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/pEEbW81aOIA?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">How To Train Your Dragon Theme</div>
+            <div class="cover-artist">John Powell</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/3QWW3wUpCaE?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Fade To Black</div>
+            <div class="cover-artist">Metallica</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/qW8fVETR4UA?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Summertime Sadness</div>
+            <div class="cover-artist">Lana Del Ray</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/pUphL_ukOBE?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Pal Pal</div>
+            <div class="cover-artist">Talwiinder</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/5EYhhdsPGVg?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Final Countdown</div>
+            <div class="cover-artist">Europe</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/Id4yn5Hzhgc?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Chikni Chameli</div>
+            <div class="cover-artist">Shreya Goshal</div>
+            <span class="cover-tag">Acoustic</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://youtube.com/embed/xVSLWIvbRg4?feature=share"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Goosebumps</div>
+            <div class="cover-artist">Travis Scott</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/lScCPzbtz0g"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Aahatein</div>
+            <div class="cover-artist">Agnee</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
+
+        <div class="cover-card reveal">
+          <div class="cover-video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/-gj7oTBOEbs"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="cover-info">
+            <div class="cover-song">Whole Lotta Love</div>
+            <div class="cover-artist">Led Zeppelin</div>
+            <span class="cover-tag">Electric</span>
+          </div>
+        </div>
       </div>
-      <div class="cover-info">
-        <div class="cover-song">Anastasia</div>
-        <div class="cover-artist">Slash And Miles Kennedy</div>
-        <span class="cover-tag">Acoustic</span>
+
+      <!-- Empty state — shown until covers are added -->
+      <div class="covers-empty reveal" id="coversEmpty">
+        <span class="empty-icon">🎸</span>
+        <h3>Covers coming soon</h3>
+        <p>
+          Upload your first cover by adding a card to the grid in guitar.html —
+          see the comment inside the file for instructions.
+        </p>
       </div>
     </div>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/Jv7lGUOtrkg?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Ella Baila Sola</div>
-        <div class="cover-artist">Eslabon Armado and Peso Pluma</div>
-        <span class="cover-tag">Acoustic</span>
-      </div>
-    </div>
+    <footer>
+      © 2026 Shavinder Singh All rights reserved | Wildlife Photography & Guitar
+    </footer>
 
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/vkqL4qkBpF0?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Eruption</div>
-        <div class="cover-artist">Van Halen</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/ZLq_h1wZhYQ?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Pokemon theme</div>
-        <div class="cover-artist">Jason Paige</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/EKyLMAM2KuA?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Stranger Things Theme</div>
-        <div class="cover-artist">Kyle Dixon and Micheal Stein</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://youtube.com/embed/37VKztncr90?feature=share"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">November Rain</div>
-        <div class="cover-artist">Guns N Roses</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/lScCPzbtz0g"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Aahatein</div>
-        <div class="cover-artist">Agnee</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-    <div class="cover-card reveal">
-      <div class="cover-video-wrap">
-        <iframe
-          src="https://www.youtube.com/embed/-gj7oTBOEbs"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <div class="cover-info">
-        <div class="cover-song">Whole Lotta Love</div>
-        <div class="cover-artist">Led Zeppelin</div>
-        <span class="cover-tag">Electric</span>
-      </div>
-    </div>
-
-
-
-  </div>
-
-  <!-- Empty state — shown until covers are added -->
-  <div class="covers-empty reveal" id="coversEmpty">
-    <span class="empty-icon">🎸</span>
-    <h3>Covers coming soon</h3>
-    <p>Upload your first cover by adding a card to the grid in guitar.html — see the comment inside the file for instructions.</p>
-  </div>
-</div>
-
-<footer>
-  © 2026 Shavinder Singh All rights reserved | Wildlife Photography & Guitar
-</footer>
-
-<script src="script.js"></script>
-<script>
-  // Hide empty state if there are real cover cards
-  document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('coversGrid');
-    const empty = document.getElementById('coversEmpty');
-    const realCards = grid.querySelectorAll('.cover-card:not([style*="display:none"])');
-    if (realCards.length > 0) {
-      empty.style.display = 'none';
-    }
-  });
-</script>
-
-</body>
+    <script src="script.js"></script>
+    <script>
+      // Hide empty state if there are real cover cards
+      document.addEventListener("DOMContentLoaded", () => {
+        const grid = document.getElementById("coversGrid");
+        const empty = document.getElementById("coversEmpty");
+        const realCards = grid.querySelectorAll(
+          '.cover-card:not([style*="display:none"])',
+        );
+        if (realCards.length > 0) {
+          empty.style.display = "none";
+        }
+      });
+    </script>
+  </body>
 </html>
