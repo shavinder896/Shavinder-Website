@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | Shavinder NEF</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .checkout-container {
+        max-width: 800px;
+        margin: 80px auto;
+        padding: 20px;
+        background: #161616;
+        border-radius: 8px;
+      }
+      .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        border-bottom: 1px solid #333;
+      }
+      .cart-item img {
+        width: 80px;
+        border-radius: 5px;
+      }
+      .checkout-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .checkout-form textarea {
+        padding: 12px;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+      }
+      .checkout-btn {
+        padding: 15px;
+        background: #2a9d8f;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1.1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-btn" onclick="window.location.href = 'index.html'">
+      ← Back
+    </div>
+
+    <div class="checkout-container">
+      <h2>Review Your Cart</h2>
+      <div id="cartItemsContainer"></div>
+
+      <h2 style="margin-top: 30px">Shipping Details</h2>
+      <form class="checkout-form" onsubmit="processCheckout(event)">
+        <textarea
+          id="shippingAddress"
+          rows="3"
+          placeholder="Enter your full shipping address"
+          required
+        ></textarea>
+        <button type="submit" class="checkout-btn">Complete Purchase</button>
+      </form>
+    </div>
+
+    <script>
+      let currentUser = null;
+      let cart = [];
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Verify Login safely
+        currentUser = JSON.parse(localStorage.getItem("wildlifeUser"));
+        if (!currentUser) {
+          alert("Please log in to check out!");
+          window.location.href = "login.html";
+          return; // Stop script execution
+        }
+
+        // 2. Load Cart Safely
+        cart = JSON.parse(localStorage.getItem("wildlifeCart")) || [];
+        const cartContainer = document.getElementById("cartItemsContainer");
+        const checkoutBtn = document.getElementById("checkoutSubmitBtn");
+
+        if (cart.length === 0) {
+          cartContainer.innerHTML =
+            '<p style="color:#aaa;">Your cart is completely empty.</p>';
+          if (checkoutBtn) checkoutBtn.disabled = true;
+        } else {
+          let cartHTML = "";
+          cart.forEach((item) => {
+            cartHTML += `
+          <div class="cart-item">
+            <img src="${item.imageUrl}" alt="Print">
+            <div>
+              <p><strong>Size:</strong> ${item.size}</p>
+              <p><strong>Finish:</strong> ${item.finish}</p>
+            </div>
+          </div>
+        `;
+          });
+          cartContainer.innerHTML = cartHTML;
+        }
+      });
+
+      // 3. Bulletproof Checkout Function
+      async function processCheckout(event) {
+        event.preventDefault(); // Stop page from refreshing
+
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+          return;
+        }
+
+        const addressInput = document.getElementById("shippingAddress").value;
+        if (!addressInput || addressInput.trim() === "") {
+          alert("Please enter a valid shipping address.");
+          return;
+        }
+
+        const submitBtn = event.target.querySelector('button[type="submit"]');
+        submitBtn.innerText = "Processing...";
+        submitBtn.disabled = true;
+
+        const payload = {
+          userId: currentUser.id,
+          name: currentUser.name,
+          email: currentUser.email,
+          address: addressInput,
+          cart: cart,
+        };
+
+        try {
+          const response = await fetch("http://localhost:3000/api/checkout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          if (response.ok) {
+            alert(
+              "Order placed successfully! Redirecting to your dashboard...",
+            );
+            localStorage.removeItem("wildlifeCart"); // Empty the cart
+            window.location.href = "my-orders.html";
+          } else {
+            const errorData = await response.json();
+            alert(
+              "Failed to process checkout: " +
+                (errorData.message || "Unknown error"),
+            );
+            submitBtn.innerText = "Complete Purchase";
+            submitBtn.disabled = false;
+          }
+        } catch (error) {
+          console.error("Checkout Error:", error);
+          alert("Server connection failed. Is your Node.js server running?");
+          submitBtn.innerText = "Complete Purchase";
+          submitBtn.disabled = false;
+        }
+      }
+    </script>
+  </body>
+</html>
