@@ -1,47 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Orders | Shavinder NEF</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .orders-container { max-width: 800px; margin: 80px auto; padding: 20px; background: #161616; border-radius: 8px; }
-    .order-card { display: flex; gap: 20px; padding: 15px; border-bottom: 1px solid #333; align-items: center; }
-    .order-card img { width: 100px; border-radius: 5px; }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders | Shavinder NEF</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .orders-container {
+        max-width: 800px;
+        margin: 80px auto;
+        padding: 20px;
+        background: #161616;
+        border-radius: 8px;
+      }
+      .order-card {
+        display: flex;
+        gap: 20px;
+        padding: 15px;
+        border-bottom: 1px solid #333;
+        align-items: center;
+      }
+      .order-card img {
+        width: 100px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-btn" onclick="window.location.href = 'index.html'">
+      ← Home
+    </div>
 
-<div class="menu-btn" onclick="window.location.href='index.html'">← Home</div>
+    <div class="orders-container">
+      <h2>My Order History</h2>
+      <button
+        onclick="logoutUser()"
+        style="
+          margin-bottom: 20px;
+          padding: 8px 15px;
+          background: #333;
+          color: #fff;
+          border: 1px solid #555;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+      >
+        Log Out
+      </button>
+      <div id="historyContainer">Loading your orders...</div>
+    </div>
 
-<div class="orders-container">
-  <h2>My Order History</h2>
-  <button onclick="logoutUser()" style="margin-bottom: 20px; padding: 8px 15px; background: #333; color: #fff; border: 1px solid #555; border-radius: 5px; cursor: pointer;">Log Out</button>
-  <div id="historyContainer">Loading your orders...</div>
-</div>
-
-<script>
-  const currentUser = JSON.parse(localStorage.getItem('wildlifeUser'));
-  if (!currentUser) {
-    window.location.href = 'login.html';
-  }
-
-  async function loadHistory() {
-    try {
-      const response = await fetch(`http://localhost:3000/api/my-orders/${currentUser.id}`);
-      const orders = await response.json();
-      
-      const container = document.getElementById('historyContainer');
-      container.innerHTML = ''; 
-
-      if (orders.length === 0) {
-        container.innerHTML = '<p>You have not placed any orders yet.</p>';
-        return;
+    <script>
+      const currentUser = JSON.parse(localStorage.getItem("wildlifeUser"));
+      if (!currentUser) {
+        window.location.href = "login.html";
       }
 
-      orders.forEach(order => {
-        container.innerHTML += `
+      async function loadHistory() {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/my-orders/${currentUser.id}`,
+          );
+          const orders = await response.json();
+
+          const container = document.getElementById("historyContainer");
+          container.innerHTML = "";
+
+          if (orders.length === 0) {
+            container.innerHTML = "<p>You have not placed any orders yet.</p>";
+            return;
+          }
+
+          orders.forEach((order) => {
+            container.innerHTML += `
           <div class="order-card">
             <img src="${order.IMAGE_URL}" alt="Print">
             <div>
@@ -52,18 +83,18 @@
             </div>
           </div>
         `;
-      });
-    } catch (error) {
-      document.getElementById('historyContainer').innerHTML = '<p style="color:red;">Failed to load history.</p>';
-    }
-  }
+          });
+        } catch (error) {
+          document.getElementById("historyContainer").innerHTML =
+            '<p style="color:red;">Failed to load history.</p>';
+        }
+      }
 
-  loadHistory();
-  function logoutUser() {
-  localStorage.removeItem('wildlifeUser');
-  window.location.href = 'index.html';
-}
-</script>
-
-</body>
+      loadHistory();
+      function logoutUser() {
+        localStorage.removeItem("wildlifeUser");
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
 </html>
